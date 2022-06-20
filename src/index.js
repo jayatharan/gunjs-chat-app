@@ -4,6 +4,8 @@ import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import GunProvider from './gun/GunProvider';
+import { ThemeProvider } from '@mui/material/styles';
+import defaultTheme from './theme/defaultTheme';
 
 require('gun/sea')
 
@@ -12,7 +14,9 @@ root.render(
   <React.StrictMode>
     <GunProvider>
       <BrowserRouter>
-        <App />
+        <ThemeProvider theme={defaultTheme}>
+          <App />
+        </ThemeProvider>
       </BrowserRouter>
     </GunProvider>
   </React.StrictMode>

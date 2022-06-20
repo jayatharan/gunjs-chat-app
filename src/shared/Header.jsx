@@ -8,7 +8,7 @@ import {
 } from "@mui/material"
 import AdbIcon from '@mui/icons-material/Adb';
 import { GunContext } from '../gun/GunProvider';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from './Menu';
@@ -39,13 +39,12 @@ const Header = () => {
                 <Container maxWidth="sm" sx={{}}>
                     <Toolbar disableGutters>
                         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }} onClick={()=>navigate('/')}>
                                 <AdbIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
                                 <Typography
                                     variant="h5"
                                     noWrap
                                     component="a"
-                                    href="/"
                                     sx={{
                                         mr: 2,
                                         display: { md: 'flex' },
@@ -55,7 +54,7 @@ const Header = () => {
                                         color: 'inherit',
                                         textDecoration: 'none'
                                     }}
-                                >
+                                    >
                                     Watch
                                 </Typography>
                             </Box>

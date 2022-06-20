@@ -114,7 +114,7 @@ const NewChat = () => {
                     sx={{marginY:'10px', width:'100%'}}
                 />
                 <MultipleCheckBox onChange={handleChange} options={friends.map(u => ({title:`${u.firstname} ${u.lastname}`, pkey:u.pkey}))} label={"Friends"} placeholder={"Select Users"} />
-                <FileUploader onFileChange={handleFileChange}>
+                <FileUploader fileType={"image/*"} onFileChange={handleFileChange}>
                     <Button component="span" sx={{mt:'10px'}}>Chat Image</Button>
                 </FileUploader>
             </Box>

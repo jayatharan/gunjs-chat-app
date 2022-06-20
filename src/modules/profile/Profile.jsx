@@ -152,7 +152,7 @@ const Profile = () => {
                 />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                <FileUploader onFileChange={handleFileChange}>
+                <FileUploader onFileChange={handleFileChange} fileType="image/*">
                     <Button component="span">Change Profile Pic</Button>
                 </FileUploader>
             </Box>

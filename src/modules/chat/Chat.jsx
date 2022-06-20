@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import {
     Box,
     Card,
@@ -23,6 +23,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Popup from '../../shared/Popup';
 
 const Chat = () => {
+    const messageContainerRef = useRef(null);
     const gunContext = useContext(GunContext);
     const urlParams = useParams()
     const navigate = useNavigate();
@@ -76,7 +77,7 @@ const Chat = () => {
         if(data && !messageIds.includes(id.toString())){
             messageIds.push(id.toString());
             const dec = await gunContext.SEA.decrypt(data.emessage, pair)
-            setMessages((prev)=>([...prev, {...dec, id:id.toString()}]));
+            setMessages((prev)=>([{...dec, id:id.toString()}, ...prev]));
         }
     }
 
@@ -122,16 +123,19 @@ const Chat = () => {
                 open={viewFile?true:false}
                 onClose={()=>{setViewFile(null)}}
             >
-                <Box sx={{maxHeight:'80vh', overflowY:'auto'}}>
-                    {viewFile&&(
-                        <FileViewer 
-                            fileType={viewFile.fileType}
-                            filePath={viewFile.file}
-                        />
-                    )}
+                <Box>
+                    <Box sx={{width:'100%', height: '100%',maxHeight:'80vh', overflow: "auto"}}>
+                        {viewFile&&(
+                            <FileViewer 
+                                width='100%'
+                                fileType={viewFile.fileType}
+                                filePath={viewFile.file}
+                            />
+                        )}
+                    </Box>
                 </Box>
             </Popup>
-            <Box sx={{height:'90vh', display:'flex', flexDirection: 'column',justifyContent: 'space-between'}}>
+            <Box sx={{ display:'flex', flexDirection: 'column'}}>
                 {chat&&(
                     <Card>
                     <CardHeader
@@ -146,8 +150,8 @@ const Chat = () => {
                     />
                     </Card>
                 )}
-                <Box>
-                    <Box sx={{display:'flex', flexDirection: 'column', maxHeight:'70vh', overflowY:'auto'}}>
+                <Box sx={{marginTop:'10px'}}>
+                    <Box ref={messageContainerRef} sx={{display:'flex', flexDirection: 'column-reverse', height:'100%', maxHeight:'75vh', minHeight:'50vh', overflowY:'auto', marginBottom:'5px' }}>
                         {messages.map((m,i)=>(
                             <Message key={`${m.id}-${i}`} message={m} pkey={pkey} handleViewFile={handleViewFile} />
                         ))}

@@ -4,7 +4,7 @@ import {
 } from "@mui/material";
 import { Buffer } from 'buffer';
 
-const FileUploader = ({children, id=1, onFileChange}) => {
+const FileUploader = ({children, id=1, onFileChange, fileType=undefined}) => {
 
     const retriveFile = (e) => {
         const data = e.target.files[0];
@@ -21,7 +21,7 @@ const FileUploader = ({children, id=1, onFileChange}) => {
             <label htmlFor={`select-file-${id}`}>
                 {children}
             </label>    
-            <Input type='file' id={`select-file-${id}`} style={{display:'none'}} onChange={(e)=>retriveFile(e)} />
+            <input type='file' accept={fileType} id={`select-file-${id}`} style={{display:'none'}} onChange={(e)=>retriveFile(e)} />
         </>
     )
 }

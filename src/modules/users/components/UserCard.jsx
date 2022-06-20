@@ -15,7 +15,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandMore from '../../../shared/ExpandButton';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-const UserCard = ({user, sendFriendRequest}) => {
+const UserCard = ({user, sendFriendRequest, isFriend}) => {
     const [expand, setExpand] = useState(false);
 
     return (
